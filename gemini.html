@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Logo</title>
+	<link rel="icon" href="https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg" sizes="any" type="image/svg+xml">
+    <style>
+        :root {
+            --bg-color: #f0f4f9;
+            --text-color: #1f1f1f;
+            --nav-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --svg-hover-color: #ffd700; /* Gold color for hover */
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--nav-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f6368;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f1f3f4;
+            color: #000;
+        }
+
+        button.active {
+            background: linear-gradient(90deg, #4b90ff 0%, #ff5546 100%);
+            color: white;
+        }
+
+        /* Main Container */
+        main {
+            margin-top: 3rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 80%;
+            max-width: 600px;
+            min-height: 450px; /* Slightly taller for controls */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .page-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-content.active-page {
+            display: flex;
+        }
+
+        h2 { margin-bottom: 1.5rem; color: #444; }
+
+        /* --- Canvas Controls --- */
+        .controls {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        
+        input[type="color"] {
+            cursor: pointer;
+            border: none;
+            width: 40px;
+            height: 40px;
+            background: none;
+        }
+
+        canvas {
+            border: 1px solid #eee;
+            border-radius: 10px;
+        }
+
+        /* --- SVG Interactive Styling --- */
+        /* We use a class .gemini-path to target the svg shapes */
+        .gemini-path {
+            transition: fill 0.3s ease, transform 0.3s ease;
+            /* Default fill is set in HTML or via variable below */
+        }
+
+        /* When hovering over the SVG container, change the path fill */
+        svg:hover .gemini-path {
+            fill: var(--svg-hover-color) !important; /* Force override gradient */
+            cursor: pointer;
+        }
+        
+        /* Optional: a little scale effect on hover too */
+        svg:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        img { max-width: 300px; height: auto; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button onclick="showPage('canvas')" id="btn-canvas" class="active">Canvas</button>
+        <button onclick="showPage('svg')" id="btn-svg">SVG</button>
+        <button onclick="showPage('png')" id="btn-png">PNG</button>
+    </nav>
+
+    <main>
+        <div id="page-canvas" class="page-content active-page">
+            <h2>Canvas</h2>
+            
+            <div class="controls">
+                <label for="colorPicker">Pick a color:</label>
+                <input type="color" id="colorPicker" value="#4b90ff">
+            </div>
+
+            <canvas id="geminiCanvas" width="300" height="300"></canvas>
+        </div>
+
+        <div id="page-svg" class="page-content">
+            <h2>SVG</h2>
+            
+            <svg width="300" height="300" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="geminiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4b90ff;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ff5546;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                
+                <path class="gemini-path" 
+                      d="M50 10 C 50 35, 65 50, 90 50 C 65 50, 50 65, 50 90 C 50 65, 35 50, 10 50 C 35 50, 50 35, 50 10" 
+                      fill="url(#geminiGradient)" />
+                
+                <path class="gemini-path" 
+                      d="M75 10 C 75 20, 80 25, 90 25 C 80 25, 75 30, 75 40 C 75 30, 70 25, 60 25 C 70 25, 75 20, 75 10" 
+                      fill="url(#geminiGradient)" opacity="0.8"/>
+            </svg>
+        </div>
+
+        <div id="page-png" class="page-content">
+            <h2>PNG</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" 
+                 alt="Gemini Logo PNG">
+        </div>
+    </main>
+
+    <script>
+        // --- Navigation Logic ---
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            const buttons = document.querySelectorAll('nav button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById('page-' + pageId).classList.add('active-page');
+            document.getElementById('btn-' + pageId).classList.add('active');
+
+            if(pageId === 'canvas') {
+                drawGeminiCanvas();
+            }
+        }
+
+        // --- Canvas Drawing Logic ---
+        const colorPicker = document.getElementById('colorPicker');
+        
+        // Listen for color changes
+        colorPicker.addEventListener('input', drawGeminiCanvas);
+
+        function drawGeminiCanvas() {
+            const canvas = document.getElementById('geminiCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Get the current color from the input
+            const userColor = colorPicker.value;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            function drawSparkle(cx, cy, outerRadius, innerRadius) {
+                ctx.beginPath();
+                // Set fill style to user's choice
+                ctx.fillStyle = userColor;
+                
+                // Draw star shape
+                ctx.moveTo(cx, cy - outerRadius);
+                ctx.quadraticCurveTo(cx, cy, cx + outerRadius, cy);
+                ctx.quadraticCurveTo(cx, cy, cx, cy + outerRadius);
+                ctx.quadraticCurveTo(cx, cy, cx - outerRadius, cy);
+                ctx.quadraticCurveTo(cx, cy, cx, cy - outerRadius);
+                
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            // Draw with selected color
+            drawSparkle(150, 150, 100, 20);
+            drawSparkle(220, 80, 40, 10);
+        }
+
+        // Initial draw
+        window.onload = drawGeminiCanvas;
+    </script>
+</body>
+</html>
