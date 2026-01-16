@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gemini Logo</title>
 	<link rel="icon" href="https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg" sizes="any" type="image/svg+xml">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f0f4f9;
@@ -15,7 +16,6 @@
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -35,6 +35,10 @@
             gap: 1rem;
         }
 
+		button, label{
+			font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+		}
+		
         button {
             background: none;
             border: none;
@@ -53,7 +57,7 @@
         }
 
         button.active {
-            background: linear-gradient(90deg, #4b90ff 0%, #ff5546 100%); //preliv od leve proti desni, modre proti rdeči
+            background: linear-gradient(90deg, #4b90ff 0%, #ff5546 100%); /*preliv od leve proti desni, modre proti rdeči*/
             color: white;
         }
 
@@ -87,8 +91,10 @@
             display: flex;
         }
 
-        h2 { margin-bottom: 1.5rem; color: #444; }
-
+        h2 {
+			font-family: 'Dancing Script', sans-serif;
+			margin-bottom: 1.5rem; color: #444;
+		}
 		
         .controls {
             margin-bottom: 1rem;
@@ -111,8 +117,8 @@
         canvas {
             border: 1px solid #eee;
             border-radius: 10px;
-        }
-
+		}
+		
         /* --- SVG Interactive Styling --- */
         /* We use a class .gemini-path to target the svg shapes */
         .gemini-path {
@@ -152,7 +158,7 @@
 
     <main>
         <div id="page-canvas" class="page-content active-page">
-            <h2>Canvas</h2>
+            <h2>CANVAS</h2>
             
             <div class="controls">
                 <label for="colorPicker">Pick a color:</label>
@@ -249,5 +255,6 @@
 </body>
 
 </html>
+
 
 
