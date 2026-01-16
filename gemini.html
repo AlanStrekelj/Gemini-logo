@@ -25,7 +25,6 @@
             min-height: 100vh;
         }
 
-        /* Navigation */
         nav {
             background-color: var(--nav-bg);
             padding: 1rem 2rem;
@@ -54,11 +53,10 @@
         }
 
         button.active {
-            background: linear-gradient(90deg, #4b90ff 0%, #ff5546 100%);
+            background: linear-gradient(90deg, #4b90ff 0%, #ff5546 100%); //preliv od leve proti desni, modre proti rdeči
             color: white;
         }
 
-        /* Main Container */
         main {
             margin-top: 3rem;
             background: white;
@@ -67,7 +65,7 @@
             box-shadow: var(--shadow);
             width: 80%;
             max-width: 600px;
-            min-height: 450px; /* Slightly taller for controls */
+            min-height: 450px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -91,7 +89,7 @@
 
         h2 { margin-bottom: 1.5rem; color: #444; }
 
-        /* --- Canvas Controls --- */
+		
         .controls {
             margin-bottom: 1rem;
             display: flex;
@@ -122,19 +120,21 @@
             /* Default fill is set in HTML or via variable below */
         }
 
-        /* When hovering over the SVG container, change the path fill */
+        /*Spremeni barvo SVG*/
         svg:hover .gemini-path {
-            fill: var(--svg-hover-color) !important; /* Force override gradient */
+            fill: var(--svg-hover-color) !important;
             cursor: pointer;
         }
         
-        /* Optional: a little scale effect on hover too */
         svg:hover {
             transform: scale(1.05);
             transition: transform 0.3s ease;
         }
 
-        img { max-width: 300px; height: auto; }
+        img {
+			max-width: 300px;
+			height: auto;
+		}
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -185,13 +185,13 @@
 
         <div id="page-png" class="page-content">
             <h2>PNG</h2>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png" 
+            <img src=">Gemini.png" 
                  alt="Gemini Logo PNG">
         </div>
     </main>
 
     <script>
-        // --- Navigation Logic ---
+        //Navigation Logic
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => page.classList.remove('active-page'));
@@ -207,17 +207,17 @@
             }
         }
 
-        // --- Canvas Drawing Logic ---
+        //Canvas Drawing
         const colorPicker = document.getElementById('colorPicker');
         
-        // Listen for color changes
+        //Listen for color changes
         colorPicker.addEventListener('input', drawGeminiCanvas);
 
         function drawGeminiCanvas() {
             const canvas = document.getElementById('geminiCanvas');
             const ctx = canvas.getContext('2d');
             
-            // Get the current color from the input
+            //Get current color from the input
             const userColor = colorPicker.value;
 
             // Clear canvas
@@ -248,4 +248,5 @@
         window.onload = drawGeminiCanvas;
     </script>
 </body>
+
 </html>
