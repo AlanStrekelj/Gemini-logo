@@ -6,6 +6,7 @@
     <title>Gemini Logo</title>
 	<link rel="icon" href="https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg" sizes="any" type="image/svg+xml">
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!-->
     <style>
         :root {
             --text-color: #1f1f1f;
@@ -14,6 +15,11 @@
             --svg-hover-color: #ffd700; /* Gold color for hover */
         }
 
+		h1{
+			color:#fff;
+			margin-bottom: 0;
+		}
+		
         body {
             background: linear-gradient(150deg, rgb(131,176,255) 0%, rgb(255,166,255) 100%);
             color: var(--text-color);
@@ -56,7 +62,7 @@
         }
 
         button.active {
-            background: linear-gradient(90deg, #4b90ff 0%, #ff5546 100%); /*preliv od leve proti desni, modre proti rdeči*/
+            background: linear-gradient(90deg, #4b90ff 0%, #ff5546 100%);
             color: white;
         }
 
@@ -117,15 +123,11 @@
             border: 1px solid #eee;
             border-radius: 10px;
 		}
-		
-        /* --- SVG Interactive Styling --- */
-        /* We use a class .gemini-path to target the svg shapes */
+
         .gemini-path {
             transition: fill 0.3s ease, transform 0.3s ease;
-            /* Default fill is set in HTML or via variable below */
         }
 
-        /*Spremeni barvo SVG*/
         svg:hover .gemini-path {
             fill: var(--svg-hover-color) !important;
             cursor: pointer;
@@ -141,6 +143,15 @@
 			height: auto;
 		}
 
+		footer {
+			margin-top: 20px;
+			color: #404040;
+		}
+		
+		.swal2-popup{
+			font: normal normal normal 32px/1.5 'Dancing Script', sans-serif;
+		}
+		
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -149,6 +160,9 @@
 </head>
 <body>
 
+	<header>
+        <h1>Logo - Gemini</h1>
+    </header>
     <nav>
         <button onclick="showPage('canvas')" id="btn-canvas" class="active">Canvas</button>
         <button onclick="showPage('svg')" id="btn-svg">SVG</button>
@@ -193,9 +207,11 @@
             <img src="Gemini.png" alt="Gemini Logo PNG">
         </div>
     </main>
+	<footer>
+        <div>Avtor: <button onclick="showContact()">Alan Štrekelj</button></div><!-->
+    </footer>
 
     <script>
-        //Navigation Logic
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => page.classList.remove('active-page'));
@@ -211,28 +227,22 @@
             }
         }
 
-        //Canvas Drawing
         const colorPicker = document.getElementById('colorPicker');
         
-        //Listen for color changes
         colorPicker.addEventListener('input', drawGeminiCanvas);
 
         function drawGeminiCanvas() {
             const canvas = document.getElementById('geminiCanvas');
             const ctx = canvas.getContext('2d');
             
-            //Get current color from the input
             const userColor = colorPicker.value;
 
-            // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             function drawSparkle(cx, cy, outerRadius, innerRadius) {
                 ctx.beginPath();
-                // Set fill style to user's choice
                 ctx.fillStyle = userColor;
                 
-                // Draw star shape
                 ctx.moveTo(cx, cy - outerRadius);
                 ctx.quadraticCurveTo(cx, cy, cx + outerRadius, cy);
                 ctx.quadraticCurveTo(cx, cy, cx, cy + outerRadius);
@@ -243,13 +253,21 @@
                 ctx.closePath();
             }
 
-            // Draw with selected color
             drawSparkle(150, 150, 100, 20);
             drawSparkle(220, 80, 40, 10);
         }
 
-        // Initial draw
+		function showContact(){
+			Swal.fire({
+			  title: 'Avtor',
+			  html: 'Napravil: Alan Štrekelj, 4RA<br><br>Mentor: Alen Andrlič<br><br>Leto: 2025/2026',
+			  confirmButtonText: 'V redu'
+			});
+		}
+		
+        
         window.onload = drawGeminiCanvas;
     </script>
 </body>
+
 </html>
