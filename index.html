@@ -12,7 +12,7 @@
             --text-color: #1f1f1f;
             --nav-bg: #ffffff;
             --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --svg-hover-color: #ffd700; /* Gold color for hover */
+            --svg-hover-color: #ffd700;
         }
 
 		h1{
@@ -40,7 +40,7 @@
             gap: 1rem;
         }
 
-		button, label{
+		label{
 			font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 		}
 		
@@ -96,8 +96,11 @@
             display: flex;
         }
 
-        h2 {
+		h1, h2, button, #divAvtor{
 			font-family: 'Dancing Script', sans-serif;
+		}
+		
+        h2 {
 			margin-bottom: 1.5rem; color: #444;
 		}
 		
@@ -208,7 +211,7 @@
         </div>
     </main>
 	<footer>
-        <div>Avtor: <button onclick="showContact()">Alan Štrekelj</button></div><!-->
+        <div id="divAvtor">Avtor: <button onclick="showContact()" id="buttonAvtor">Alan Štrekelj</button></div><!-->
     </footer>
 
     <script>
